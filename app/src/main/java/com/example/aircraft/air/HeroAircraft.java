@@ -5,6 +5,7 @@ import com.example.aircraft.ImageManager;
 import com.example.aircraft.MainActivity;
 import com.example.aircraft.bullet.BaseBullet;
 import com.example.aircraft.bullet.HeroBullet;
+import com.example.aircraft.shoot_strategy.SingleShoot;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,10 +28,14 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+        this.setStrategy(new SingleShoot());
     }
 
     public static HeroAircraft getInstance() {
         return instance;
+    }
+    public void resetHp() {
+        HeroAircraft.getInstance().hp = 100;
     }
 
     @Override
@@ -44,12 +49,13 @@ public class HeroAircraft extends AbstractAircraft {
      * @return 射击出的子弹List
      */
     public List<BaseBullet> execute_shoot() {
-        List<BaseBullet> res = new LinkedList<>();
-        BaseBullet baseBullet;
-        int speedX = 0;
-        baseBullet = new HeroBullet(locationX, locationY + direction*2, speedX, speedY + direction*5, power);
-        res.add(baseBullet);
-        return res;
+//        List<BaseBullet> res = new LinkedList<>();
+//        BaseBullet baseBullet;
+//        int speedX = 0;
+//        baseBullet = new HeroBullet(locationX, locationY + direction*2, speedX, speedY + direction*5, power);
+//        res.add(baseBullet);
+//        return res;
+        return strategy.shoot(locationX, locationY, speedY, direction, power, true);
     }
 
     public void increaseNum(int n) {

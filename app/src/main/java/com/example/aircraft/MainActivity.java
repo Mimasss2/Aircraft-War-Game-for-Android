@@ -13,7 +13,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     public static int height;
-    public static  int width;
+    public static int width;
+    public static boolean music;
 
 
     @Override

@@ -2,6 +2,7 @@ package com.example.aircraft.air;
 
 import com.example.aircraft.basic.AbstractFlyingObject;
 import com.example.aircraft.bullet.BaseBullet;
+import com.example.aircraft.shoot_strategy.ShootStrategy;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      */
     protected int maxHp;
     protected int hp;
+    protected ShootStrategy strategy;
     protected int shootNum = 1;
 
     public int getshootNum() {
@@ -46,5 +48,9 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      *  非可射击对象空实现，返回null
      */
     public abstract List<BaseBullet> execute_shoot();
+
+    public void setStrategy(ShootStrategy s) {
+        this.strategy = s;
+    }
 
 }
