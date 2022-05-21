@@ -12,9 +12,15 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aircraft.air.BossEnemy;
+import com.example.aircraft.air.EliteEnemy;
 import com.example.aircraft.air.HeroAircraft;
 import com.example.aircraft.air.MobEnemy;
+import com.example.aircraft.bullet.EnemyBullet;
 import com.example.aircraft.bullet.HeroBullet;
+import com.example.aircraft.item.BloodItem;
+import com.example.aircraft.item.BombItem;
+import com.example.aircraft.item.BulletItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +38,9 @@ public class GameActivity extends AppCompatActivity {
     public static Bitmap BLOOD_PROP_IMAG;
     public static Bitmap BOMB_PROP_IMAG;
     public static Bitmap BULLET_PROP_IMAG;
+    public static GameView gameView;
+
+    private boolean isControllingHero = false;
 
 
     public static Bitmap get(String className){
@@ -64,16 +73,65 @@ public class GameActivity extends AppCompatActivity {
 
         CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
         CLASSNAME_IMAGE_MAP.put(MobEnemy.class.getName(), MOB_ENEMY_IMAGE);
-//        CLASSNAME_IMAGE_MAP.put(EliteEnemy.class.getName(), ELITE_ENEMY_IMAGE);
-//        CLASSNAME_IMAGE_MAP.put(BossEnemy.class.getName(), BOSS_ENEMY_IMAGE);
+        CLASSNAME_IMAGE_MAP.put(EliteEnemy.class.getName(), ELITE_ENEMY_IMAGE);
+        CLASSNAME_IMAGE_MAP.put(BossEnemy.class.getName(), BOSS_ENEMY_IMAGE);
         CLASSNAME_IMAGE_MAP.put(HeroBullet.class.getName(), HERO_BULLET_IMAGE);
-//        CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
+        CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
 //
-//        CLASSNAME_IMAGE_MAP.put(HpItem.class.getName(), BLOOD_ITEM_IMAG);
-//        CLASSNAME_IMAGE_MAP.put(BombItem.class.getName(), BOMB_ITEM_IMAG);
-//        CLASSNAME_IMAGE_MAP.put(BulletItem.class.getName(), BULLET_ITEM_IMAG);
+        CLASSNAME_IMAGE_MAP.put(BloodItem.class.getName(), BLOOD_PROP_IMAG);
+        CLASSNAME_IMAGE_MAP.put(BombItem.class.getName(), BOMB_PROP_IMAG);
+        CLASSNAME_IMAGE_MAP.put(BulletItem.class.getName(), BULLET_PROP_IMAG);
 
         setContentView(R.layout.activity_game);
+        gameView = findViewById(R.id.GameView);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        System.out.println("touch event triggered!");
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        HeroAircraft hero = gameView.getHeroAircraft();
+        int leftBoundary = hero.getLocationX() - hero.getImage().getWidth();
+        int rightBoundary = hero.getLocationX() + hero.getImage().getWidth();
+        int topBoundary = hero.getLocationY() - hero.getImage().getHeight();
+        int bottomBoundary = hero.getLocationY() + hero.getImage().getHeight();
+        System.out.println("clickX:"+x);
+        System.out.println("clickY:"+y);
+        System.out.println("leftBoudary:"+leftBoundary);
+        System.out.println("rightBoudary:"+rightBoundary);
+        System.out.println("topBoudary:"+topBoundary);
+        System.out.println("bottomBoudary:"+bottomBoundary);
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            if ( x<0 || x>MainActivity.width || y<0 || y>MainActivity.height){
+                // 防止超出边界
+                return true;
+            }
+            if( x > leftBoundary && x < rightBoundary && y > topBoundary && y < bottomBoundary) {
+                isControllingHero = true;
+                System.out.println("controlling");
+            }
+        }
+        else if(event.getAction() == MotionEvent.ACTION_MOVE) {
+            if ( x<0 || x>MainActivity.width || y<0 || y>MainActivity.height){
+                // 防止超出边界
+                return true;
+            }
+            if(isControllingHero) {
+                gameView.getHeroAircraft().setLocation(x,y);
+                System.out.println("moving");
+            }
+
+        }
+        else if(event.getAction() == MotionEvent.ACTION_UP) {
+            System.out.println("control end");
+            isControllingHero = false;
+        }
+        else if(event.getAction() == MotionEvent.ACTION_CANCEL){
+            System.out.println("control canceled.");
+            isControllingHero = false;
+        }
+        return true;
     }
 
     public Resources getRes() {
