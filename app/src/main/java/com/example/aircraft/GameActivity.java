@@ -45,7 +45,8 @@ public class GameActivity extends AppCompatActivity {
     public static GameView gameView;
 
     private boolean isControllingHero = false;
-    public static MusicService.MyBinder myBinder;
+    public MusicService.MyBinder myBinder;
+//    public static MusicService.MyBinder myBinder;
     private Connect conn;
     private Intent intent;
 
@@ -161,14 +162,19 @@ public class GameActivity extends AppCompatActivity {
 
         }
     }
-    public static void playMusicOnce(int musicType) {
+    public void playMusicOnce(int musicType) {
         myBinder.playMusicOnce(musicType);
     }
-    public static void playMusicLoop(int musicType) {
+/*    public void playMusicLoop(int musicType) {
         myBinder.playMusicLoop(musicType);
     }
-    public static void stopMusicLoop(int musicType) {
+    public void stopMusicLoop(int musicType) {
         myBinder.stopMusicLoop(musicType);
+    }*/
+    public void playBossMusic() {
+        myBinder.playBossBgm();
     }
-
+    public void stopBossMusic() {
+        myBinder.stopBossBgm();
+    }
 }

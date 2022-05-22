@@ -10,7 +10,7 @@ import java.util.Random;
 public class BossEnemyCreator implements EnemyCreator {
 
     private static Random rand = new Random();
-    private static int hp = 200;
+    private static int hp = 50;
 
     public static int getHp() {
         return hp;

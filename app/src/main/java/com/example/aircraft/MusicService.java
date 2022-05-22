@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Binder;
 import android.os.IBinder;
-import android.telephony.CarrierConfigManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,7 @@ public class MusicService extends Service {
         soundID.put(MusicConst.MUSIC_BGM, mSoundPool.load(this, R.raw.bgm, 1));
         soundID.put(MusicConst.MUSIC_BOSS_BGM, mSoundPool.load(this, R.raw.bgm_boss, 1));
         soundID.put(MusicConst.MUSIC_BOMB, mSoundPool.load(this, R.raw.bomb_explosion, 1));
-        soundID.put(MusicConst.MUSIC_BULLET_SHOOT, mSoundPool.load(this, R.raw.bullet, 1));
+        soundID.put(MusicConst.MUSIC_BULLET_SUPPLY, mSoundPool.load(this, R.raw.bullet, 1));
         soundID.put(MusicConst.MUSIC_BULLET_HIT, mSoundPool.load(this, R.raw.bullet_hit, 1));
         soundID.put(MusicConst.MUSIC_GAME_OVER, mSoundPool.load(this, R.raw.game_over, 1));
         soundID.put(MusicConst.MUSIC_SUPPLY, mSoundPool.load(this, R.raw.get_supply, 1));
@@ -50,11 +49,17 @@ public class MusicService extends Service {
         public void playMusicOnce(int musicType) {
             mSoundPool.play(soundID.get(musicType),1,1,0,0,1);
         }
-        public void playMusicLoop(int musicType) {
+/*        public void playMusicLoop(int musicType) {
             mSoundPool.play(soundID.get(musicType),1,1,0,-1,1);
         }
         public void stopMusicLoop(int musicType) {
             mSoundPool.stop(soundID.get(musicType));
+        }*/
+        public void playBossBgm() {
+            playBossMusic();
+        }
+        public void stopBossBgm() {
+            stopBossMusic();
         }
 /*
         public void playBulletHit(){
@@ -94,13 +99,13 @@ public class MusicService extends Service {
         bgmPlayer.start();
 //        Log.w("music","bgm start success");
     }
-/*    public void playBossMusic(){
-//        if(bossBgmPlayer == null){
-//            bossBgmPlayer = MediaPlayer.create(this, R.raw.bgm_boss);
-//            bossBgmPlayer.setLooping(true);
-//        }
-//        bossBgmPlayer.start();
-    }*/
+    public void playBossMusic(){
+        if(bossBgmPlayer == null){
+            bossBgmPlayer = MediaPlayer.create(this, R.raw.bgm_boss);
+            bossBgmPlayer.setLooping(true);
+        }
+        bossBgmPlayer.start();
+    }
 
     @Override
     public void onDestroy() {
@@ -118,13 +123,13 @@ public class MusicService extends Service {
             bgmPlayer = null;
         }
     }
-/*    public void stopBossMusic() {
-//        if (bossBgmPlayer != null) {
-//            bossBgmPlayer.stop();
-//            bossBgmPlayer.reset();//重置
-//            bossBgmPlayer.release();//释放
-//            bossBgmPlayer = null;
-//        }
-    }*/
+    public void stopBossMusic() {
+        if (bossBgmPlayer != null) {
+            bossBgmPlayer.stop();
+            bossBgmPlayer.reset();//重置
+            bossBgmPlayer.release();//释放
+            bossBgmPlayer = null;
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.aircraft.item;
 
+import com.example.aircraft.GameActivity;
 import com.example.aircraft.air.HeroAircraft;
 import com.example.aircraft.basic.AbstractFlyingObject;
 
@@ -8,7 +9,7 @@ public abstract class AbstractItem extends AbstractFlyingObject {
         super(locationX, locationY, speedX, speedY);
     }
 
-    public void activate(HeroAircraft hero) {
+    public void activate(HeroAircraft hero, GameActivity gameActivity) {
         System.out.println(this.getClass() + "item activated");
     }
 }

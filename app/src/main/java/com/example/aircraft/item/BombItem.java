@@ -9,6 +9,7 @@ import com.example.aircraft.air.EliteEnemy;
 import com.example.aircraft.air.HeroAircraft;
 import com.example.aircraft.basic.AbstractFlyingObject;
 import com.example.aircraft.bullet.BaseBullet;
+import com.example.aircraft.service.MusicConst;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,9 @@ public class BombItem extends AbstractItem {
     }
 
     @Override
-    public void activate(HeroAircraft hero) {
+    public void activate(HeroAircraft hero, GameActivity gameActivity) {
         if(MainActivity.music) {
-            //TODO
+            gameActivity.playMusicOnce(MusicConst.MUSIC_BOMB);
         }
         GameView g = GameActivity.gameView;
         this.notify_flyingObjects(g.getEnemyAircrafts(), g.getEnemyBullets());

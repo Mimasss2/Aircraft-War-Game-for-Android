@@ -72,7 +72,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private final List<BaseBullet> enemyBullets;
     private final List<AbstractItem> items;
     private static EnemyCreator enemy_creator;
-    private static int boss_score = 300;
+    private static int boss_score = 100;
+    private GameActivity gameActivity;
 
     public List<AbstractAircraft> getEnemyAircrafts() {
         return enemyAircrafts;
@@ -97,6 +98,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         items = new LinkedList<>();
         paint = new Paint();
         executorService = new ScheduledThreadPoolExecutor(1);
+        gameActivity = (GameActivity) context;
 
         s.addCallback(this);
     }
@@ -147,7 +149,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                     enemy_creator = new BossEnemyCreator();
                     enemyAircrafts.add(enemy_creator.createEnemy());
                     if(MainActivity.music) {
-                        //TODO
+                        gameActivity.playBossMusic();
                     }
                     boss = true;
                     last_score = score;
@@ -170,8 +172,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
             if(heroAircraft.getHp() <= 0) {
                 executorService.shutdown();
                 System.out.println("Game over");
-                GameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
-                GameActivity.stopMusicLoop(MusicConst.MUSIC_BGM);
+                gameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
             }
         };
 
@@ -284,7 +285,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                     // 敌机撞击到英雄机子弹
                     // 敌机损失一定生命值
                     if(MainActivity.music) {
-//                        GameActivity.playMusicOnce(MusicConst.MUSIC_BULLET_HIT);
+                        gameActivity.playMusicOnce(MusicConst.MUSIC_BULLET_HIT);
                     }
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
@@ -298,7 +299,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                             ((BossEnemy) enemyAircraft).dropItem();
                             boss = false;
                             if(MainActivity.music) {
-                                //TODO
+                                gameActivity.stopBossMusic();
                             }
                             score += 50;
                         }
@@ -316,7 +317,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                 continue;
             }
             else if (heroAircraft.crash(item)) {
-                item.activate(heroAircraft);
+                item.activate(heroAircraft,gameActivity);
                 item.vanish();
             }
         }
