@@ -18,7 +18,7 @@ public class HeroAircraft extends AbstractAircraft {
     private int direction = -1;  //子弹射击方向 (向上发射：1，向下发射：-1)
     private static HeroAircraft instance = new HeroAircraft(MainActivity.height / 2,
             MainActivity.width - GameActivity.HERO_IMAGE.getHeight() ,
-            0, 0, 100);
+            0, 0, 1000);
     /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标

@@ -11,7 +11,7 @@ public class EliteEnemyCreator implements EnemyCreator {
 
     private static Random rand = new Random();
     private static int speedX = 2;
-    private static int speedY = 15;
+    private static int speedY = 30;
     private static int hp = 30;
 
     public static void setSpeedX(int speedX) {

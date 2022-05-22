@@ -9,10 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -20,7 +18,6 @@ import com.example.aircraft.air.AbstractAircraft;
 import com.example.aircraft.air.BossEnemy;
 import com.example.aircraft.air.EliteEnemy;
 import com.example.aircraft.air.HeroAircraft;
-import com.example.aircraft.air.MobEnemy;
 import com.example.aircraft.basic.AbstractFlyingObject;
 import com.example.aircraft.bullet.BaseBullet;
 import com.example.aircraft.enemy_creator.BossEnemyCreator;
@@ -29,6 +26,7 @@ import com.example.aircraft.enemy_creator.EnemyCreator;
 import com.example.aircraft.enemy_creator.MobEnemyCreator;
 import com.example.aircraft.item.AbstractItem;
 import com.example.aircraft.item.BombItem;
+import com.example.aircraft.service.MusicConst;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -101,7 +99,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         executorService = new ScheduledThreadPoolExecutor(1);
 
         s.addCallback(this);
-
     }
 
     @Override
@@ -173,6 +170,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
             if(heroAircraft.getHp() <= 0) {
                 executorService.shutdown();
                 System.out.println("Game over");
+                GameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
+                GameActivity.stopMusicLoop(MusicConst.MUSIC_BGM);
             }
         };
 
@@ -285,7 +284,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                     // 敌机撞击到英雄机子弹
                     // 敌机损失一定生命值
                     if(MainActivity.music) {
-                        //TODO
+//                        GameActivity.playMusicOnce(MusicConst.MUSIC_BULLET_HIT);
                     }
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
@@ -343,4 +342,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     public void increase_score(int n) {
         this.score += n;
     }
+
+
 }
