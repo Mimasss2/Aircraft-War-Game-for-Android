@@ -1,7 +1,9 @@
 package com.example.aircraft.item;
 
+import com.example.aircraft.GameActivity;
 import com.example.aircraft.MainActivity;
 import com.example.aircraft.air.HeroAircraft;
+import com.example.aircraft.service.MusicConst;
 
 public class BloodItem extends AbstractItem {
     private int Hp;
@@ -11,9 +13,9 @@ public class BloodItem extends AbstractItem {
     }
 
     @Override
-    public void activate(HeroAircraft hero) {
+    public void activate(HeroAircraft hero, GameActivity gameActivity) {
         if(MainActivity.music) {
-            //TODO:音乐播放
+            gameActivity.playMusicOnce(MusicConst.MUSIC_SUPPLY);
         }
         hero.decreaseHp(- Hp);
     }

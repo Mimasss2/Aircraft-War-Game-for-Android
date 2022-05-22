@@ -14,10 +14,10 @@ public class SingleShoot implements ShootStrategy {
         BaseBullet baseBullet;
         int speedX = 0;
         if(is_hero) {
-            baseBullet = new HeroBullet(LocationX, LocationY + direction*2, speedX, speedY + direction*5, power);
+            baseBullet = new HeroBullet(LocationX, LocationY + direction*5, speedX, speedY + direction*10, power);
         }
         else {
-            baseBullet = new EnemyBullet(LocationX, LocationY + direction*2, speedX, speedY + direction*5, power);
+            baseBullet = new EnemyBullet(LocationX, LocationY + direction*3, speedX, speedY + direction*10, power);
         }
         res.add(baseBullet);
         return res;

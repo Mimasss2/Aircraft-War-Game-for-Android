@@ -8,7 +8,7 @@ import com.example.aircraft.air.MobEnemy;
 public class MobEnemyCreator implements EnemyCreator {
 
     private static int speedX = 0;
-    private static int speedY = 15;
+    private static int speedY = 30;
 
     public static int getSpeedX() {
         return speedX;

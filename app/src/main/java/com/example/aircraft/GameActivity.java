@@ -1,9 +1,15 @@
 package com.example.aircraft;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
@@ -18,6 +24,7 @@ import com.example.aircraft.bullet.HeroBullet;
 import com.example.aircraft.item.BloodItem;
 import com.example.aircraft.item.BombItem;
 import com.example.aircraft.item.BulletItem;
+import com.example.aircraft.service.MusicConst;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +45,10 @@ public class GameActivity extends AppCompatActivity {
     public static GameView gameView;
 
     private boolean isControllingHero = false;
-
+    public MusicService.MyBinder myBinder;
+//    public static MusicService.MyBinder myBinder;
+    private Connect conn;
+    private Intent intent;
 
     public static Bitmap get(String className){
         return CLASSNAME_IMAGE_MAP.get(className);
@@ -79,13 +89,19 @@ public class GameActivity extends AppCompatActivity {
         CLASSNAME_IMAGE_MAP.put(BombItem.class.getName(), BOMB_PROP_IMAG);
         CLASSNAME_IMAGE_MAP.put(BulletItem.class.getName(), BULLET_PROP_IMAG);
 
+        //music
+        Log.i("music demo","bind service");
+        conn = new Connect();
+        intent = new Intent(this,MusicService.class);
+        bindService(intent,conn, Context.BIND_AUTO_CREATE);
+
         setContentView(R.layout.activity_game);
         gameView = findViewById(R.id.GameView);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        System.out.println("touch event triggered!");
+//        System.out.println("touch event triggered!");
         int x = (int) event.getX();
         int y = (int) event.getY();
         HeroAircraft hero = gameView.getHeroAircraft();
@@ -93,12 +109,12 @@ public class GameActivity extends AppCompatActivity {
         int rightBoundary = hero.getLocationX() + hero.getImage().getWidth();
         int topBoundary = hero.getLocationY() - hero.getImage().getHeight();
         int bottomBoundary = hero.getLocationY() + hero.getImage().getHeight();
-        System.out.println("clickX:"+x);
-        System.out.println("clickY:"+y);
-        System.out.println("leftBoudary:"+leftBoundary);
-        System.out.println("rightBoudary:"+rightBoundary);
-        System.out.println("topBoudary:"+topBoundary);
-        System.out.println("bottomBoudary:"+bottomBoundary);
+//        System.out.println("clickX:"+x);
+//        System.out.println("clickY:"+y);
+//        System.out.println("leftBoudary:"+leftBoundary);
+//        System.out.println("rightBoudary:"+rightBoundary);
+//        System.out.println("topBoudary:"+topBoundary);
+//        System.out.println("bottomBoudary:"+bottomBoundary);
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
             if ( x<0 || x>MainActivity.width || y<0 || y>MainActivity.height){
                 // 防止超出边界
@@ -106,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
             }
             if( x > leftBoundary && x < rightBoundary && y > topBoundary && y < bottomBoundary) {
                 isControllingHero = true;
-                System.out.println("controlling");
+//                System.out.println("controlling");
             }
         }
         else if(event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -116,16 +132,16 @@ public class GameActivity extends AppCompatActivity {
             }
             if(isControllingHero) {
                 gameView.getHeroAircraft().setLocation(x,y);
-                System.out.println("moving");
+//                System.out.println("moving");
             }
 
         }
         else if(event.getAction() == MotionEvent.ACTION_UP) {
-            System.out.println("control end");
+//            System.out.println("control end");
             isControllingHero = false;
         }
         else if(event.getAction() == MotionEvent.ACTION_CANCEL){
-            System.out.println("control canceled.");
+//            System.out.println("control canceled.");
             isControllingHero = false;
         }
         return true;
@@ -133,5 +149,32 @@ public class GameActivity extends AppCompatActivity {
 
     public Resources getRes() {
         return super.getResources();
+    }
+    class Connect implements ServiceConnection {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service){
+            Log.i("music demo","Service Connnected");
+            myBinder = (MusicService.MyBinder)service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    }
+    public void playMusicOnce(int musicType) {
+        myBinder.playMusicOnce(musicType);
+    }
+/*    public void playMusicLoop(int musicType) {
+        myBinder.playMusicLoop(musicType);
+    }
+    public void stopMusicLoop(int musicType) {
+        myBinder.stopMusicLoop(musicType);
+    }*/
+    public void playBossMusic() {
+        myBinder.playBossBgm();
+    }
+    public void stopBossMusic() {
+        myBinder.stopBossBgm();
     }
 }

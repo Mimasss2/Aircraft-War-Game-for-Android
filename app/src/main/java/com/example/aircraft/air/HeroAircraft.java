@@ -6,6 +6,7 @@ import com.example.aircraft.MainActivity;
 import com.example.aircraft.bullet.BaseBullet;
 import com.example.aircraft.bullet.HeroBullet;
 import com.example.aircraft.shoot_strategy.SingleShoot;
+import com.example.aircraft.shoot_strategy.SpreadShoot;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +17,9 @@ public class HeroAircraft extends AbstractAircraft {
     private int shootNum = 1;     //子弹一次发射数量
     private int power = 30;       //子弹伤害
     private int direction = -1;  //子弹射击方向 (向上发射：1，向下发射：-1)
-    private static HeroAircraft instance = new HeroAircraft(MainActivity.height / 2,
-            MainActivity.width - GameActivity.HERO_IMAGE.getHeight() ,
-            0, 0, 100);
+    private static HeroAircraft instance = new HeroAircraft(MainActivity.width / 2,
+            MainActivity.height - 2*GameActivity.HERO_IMAGE.getHeight() ,
+            0, 0, 1000);
     /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标
@@ -28,14 +29,19 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
-        this.setStrategy(new SingleShoot());
+        this.setStrategy(new SpreadShoot());
+//        this.setStrategy(new SingleShoot());
+    }
+    public void resetToCenter() {
+        instance.setLocation(MainActivity.height / 2,
+                MainActivity.width - GameActivity.HERO_IMAGE.getHeight() );
     }
 
     public static HeroAircraft getInstance() {
         return instance;
     }
     public void resetHp() {
-        HeroAircraft.getInstance().hp = 100;
+        HeroAircraft.getInstance().hp = 1000;
     }
 
     @Override
