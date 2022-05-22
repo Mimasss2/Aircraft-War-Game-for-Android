@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aircraft"
         tools:targetApi="31">
-        <activity
+<!--        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,13 +21,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
         <activity
             android:name=".GameActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.Game" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GameHistoryActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
