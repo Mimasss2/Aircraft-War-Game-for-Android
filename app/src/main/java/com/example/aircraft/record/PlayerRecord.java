@@ -2,9 +2,10 @@ package com.example.aircraft.record;
 
 import java.util.Date;
 
-public class GameRecord {
+public class PlayerRecord {
     private String userName;
     private int score;
+    private Date date;
 
     public String getUserName() {
         return userName;
@@ -30,8 +31,6 @@ public class GameRecord {
         this.date = date;
     }
 
-    private Date date;
-
     @Override
     public String toString() {
         return "GameRecord{" +
@@ -41,7 +40,7 @@ public class GameRecord {
                 '}';
     }
 
-    public GameRecord(String userName, int score) {
+    public PlayerRecord(String userName, int score) {
         this.userName = userName;
         this.score = score;
         this.date = new Date();

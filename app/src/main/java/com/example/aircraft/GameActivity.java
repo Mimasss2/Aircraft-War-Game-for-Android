@@ -24,7 +24,6 @@ import com.example.aircraft.bullet.HeroBullet;
 import com.example.aircraft.item.BloodItem;
 import com.example.aircraft.item.BombItem;
 import com.example.aircraft.item.BulletItem;
-import com.example.aircraft.service.MusicConst;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
     public static Bitmap BOMB_PROP_IMAG;
     public static Bitmap BULLET_PROP_IMAG;
     public static GameView gameView;
+    public static int score;
 
     private boolean isControllingHero = false;
     public MusicService.MyBinder myBinder;
@@ -165,16 +165,11 @@ public class GameActivity extends AppCompatActivity {
     public void playMusicOnce(int musicType) {
         myBinder.playMusicOnce(musicType);
     }
-/*    public void playMusicLoop(int musicType) {
-        myBinder.playMusicLoop(musicType);
-    }
-    public void stopMusicLoop(int musicType) {
-        myBinder.stopMusicLoop(musicType);
-    }*/
     public void playBossMusic() {
         myBinder.playBossBgm();
     }
     public void stopBossMusic() {
         myBinder.stopBossBgm();
     }
+
 }

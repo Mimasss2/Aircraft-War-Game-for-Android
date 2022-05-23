@@ -26,6 +26,8 @@ import com.example.aircraft.enemy_creator.EnemyCreator;
 import com.example.aircraft.enemy_creator.MobEnemyCreator;
 import com.example.aircraft.item.AbstractItem;
 import com.example.aircraft.item.BombItem;
+import com.example.aircraft.record.PlayerRecordDao;
+import com.example.aircraft.record.PlayerRecordDaoImpl;
 import com.example.aircraft.service.MusicConst;
 
 import java.util.LinkedList;
@@ -74,6 +76,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private static EnemyCreator enemy_creator;
     private static int boss_score = 100;
     private GameActivity gameActivity;
+    private PlayerRecordDao playerRecordDao;
 
     public List<AbstractAircraft> getEnemyAircrafts() {
         return enemyAircrafts;
@@ -343,6 +346,4 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     public void increase_score(int n) {
         this.score += n;
     }
-
-
 }
