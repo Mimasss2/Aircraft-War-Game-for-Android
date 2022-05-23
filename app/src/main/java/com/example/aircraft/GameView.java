@@ -1,6 +1,8 @@
 package com.example.aircraft;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -38,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     private Bitmap g;
-    private Thread running;
+    public Thread running;
     private int height;
     private int width;
     private int time = 0;
@@ -84,6 +86,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     public List<BaseBullet> getEnemyBullets() {
         return enemyBullets;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public GameView(Context context, AttributeSet attrs) {
@@ -176,6 +182,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                 executorService.shutdown();
                 System.out.println("Game over");
                 gameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
+                gameActivity.show_records();
             }
         };
 
@@ -343,6 +350,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         y = y + 80;
         canvas.drawText("LIFE:" + this.heroAircraft.getHp(), x, y,paint);
     }
+
+
     public void increase_score(int n) {
         this.score += n;
     }

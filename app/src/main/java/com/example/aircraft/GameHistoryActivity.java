@@ -1,5 +1,6 @@
 package com.example.aircraft;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -35,15 +36,19 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         //test fake record
         playerRecordDao = new PlayerRecordDaoImpl(this);
-        playerRecordDao.clearAll(1);
-//        playerRecordDao.addRecord(new PlayerRecord("localUser",GameActivity.score),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",30),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",1000),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",10100),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",12000),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",10200),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",14000),1);
-        playerRecordDao.addRecord(new PlayerRecord("localUser",100),1);
+        //playerRecordDao.clearAll(1);
+        Intent i = getIntent();
+        String name = i.getStringExtra("name");
+        int score = i.getIntExtra("score", 0);
+        int mode = i.getIntExtra("mode", 0);
+        playerRecordDao.addRecord(new PlayerRecord(name, score),mode);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",30),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",1000),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",10100),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",12000),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",10200),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",14000),1);
+//        playerRecordDao.addRecord(new PlayerRecord("localUser",100),1);
         playerRecords = playerRecordDao.getAllRecords(1);
 
         setContentView(R.layout.activity_record);

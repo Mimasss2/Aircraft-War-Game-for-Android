@@ -43,6 +43,8 @@ public class GameActivity extends AppCompatActivity {
     public static Bitmap BULLET_PROP_IMAG;
     public static GameView gameView;
     public static int score;
+    private static String name = "localUser";
+    private static int mode = 1;
 
     private boolean isControllingHero = false;
     public MusicService.MyBinder myBinder;
@@ -97,6 +99,13 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         gameView = findViewById(R.id.GameView);
+
+        //show_records();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -162,6 +171,17 @@ public class GameActivity extends AppCompatActivity {
 
         }
     }
+
+    public void show_records() {
+        Intent i = new Intent();
+        i.putExtra("name", name);
+        i.putExtra("score", gameView.getScore());
+        i.putExtra("mode", 1);
+        i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameHistoryActivity"));
+
+        startActivity(i);
+    }
+
     public void playMusicOnce(int musicType) {
         myBinder.playMusicOnce(musicType);
     }
