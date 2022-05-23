@@ -49,41 +49,12 @@ public class MusicService extends Service {
         public void playMusicOnce(int musicType) {
             mSoundPool.play(soundID.get(musicType),1,1,0,0,1);
         }
-/*        public void playMusicLoop(int musicType) {
-            mSoundPool.play(soundID.get(musicType),1,1,0,-1,1);
-        }
-        public void stopMusicLoop(int musicType) {
-            mSoundPool.stop(soundID.get(musicType));
-        }*/
         public void playBossBgm() {
             playBossMusic();
         }
         public void stopBossBgm() {
             stopBossMusic();
         }
-/*
-        public void playBulletHit(){
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_BULLET_HIT), 1, 1, 0,0,1);
-        }
-        public void playGameOver(){
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_GAME_OVER), 1, 1, 0, 0, 1);
-        }
-        public void playBulletShoot(){
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_BULLET_SHOOT), 1, 1, 0, 0, 1);
-        }
-        public void playBombExplosion(){
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_BOMB), 1, 1, 0, 0, 1);
-        }
-        public void playGetSupply(){
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_SUPPLY), 1, 1, 0, 0, 1);
-        }
-        public void playBossMusic() {
-            mSoundPool.play(soundID.get(MusicConst.MUSIC_BOSS_BGM),1,1,0,-1,1);
-        }
-        public void stopBossMusic() {
-            mSoundPool.stop(soundID.get(MusicConst.MUSIC_BOSS_BGM));
-        }*/
-
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {

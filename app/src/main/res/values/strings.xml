@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Aircraft</string>
+    <string name="rank">rank</string>
+    <string name="user_name">userName</string>
+    <string name="score">score</string>
+    <string name="record_time">recordTime</string>
 </resources>
