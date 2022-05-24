@@ -31,7 +31,9 @@ import java.util.Map;
 public class GameActivity extends AppCompatActivity {
 
     private static final Map<String, Bitmap> CLASSNAME_IMAGE_MAP = new HashMap<>();
-    public static Bitmap BACKGROUND_IMAGE;
+    public static Bitmap BACKGROUND_IMAGE_EASY;
+    public static Bitmap BACKGROUND_IMAGE_NORMAL;
+    public static Bitmap BACKGROUND_IMAGE_HARD;
     public static Bitmap HERO_IMAGE;
     public static Bitmap HERO_BULLET_IMAGE;
     public static Bitmap ENEMY_BULLET_IMAGE;
@@ -76,8 +78,12 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Resources res = this.getResources();
-        BACKGROUND_IMAGE = BitmapFactory.decodeResource(res, R.drawable.bg);
-        BACKGROUND_IMAGE = Bitmap.createScaledBitmap(BACKGROUND_IMAGE, MainActivity.width, MainActivity.height, true);
+        BACKGROUND_IMAGE_EASY = BitmapFactory.decodeResource(res, R.drawable.bg);
+        BACKGROUND_IMAGE_EASY = Bitmap.createScaledBitmap(BACKGROUND_IMAGE_EASY, MainActivity.width, MainActivity.height, true);
+        BACKGROUND_IMAGE_NORMAL = BitmapFactory.decodeResource(res, R.drawable.bg3);
+        BACKGROUND_IMAGE_NORMAL = Bitmap.createScaledBitmap(BACKGROUND_IMAGE_NORMAL, MainActivity.width, MainActivity.height, true);
+        BACKGROUND_IMAGE_HARD = BitmapFactory.decodeResource(res, R.drawable.bg5);
+        BACKGROUND_IMAGE_HARD = Bitmap.createScaledBitmap(BACKGROUND_IMAGE_HARD, MainActivity.width, MainActivity.height, true);
         HERO_IMAGE = BitmapFactory.decodeResource(res, R.drawable.hero);
         HERO_BULLET_IMAGE = BitmapFactory.decodeResource(res, R.drawable.bullet_hero);
         ENEMY_BULLET_IMAGE = BitmapFactory.decodeResource(res, R.drawable.bullet_enemy);

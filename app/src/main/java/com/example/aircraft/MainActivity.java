@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     music = false;
                 }
                 else {
-                    music = false;
+                    music = true;
                 }
             }
 

@@ -56,6 +56,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private Paint paint;
     private boolean boss = false;
     private int mode = 1;
+    private Bitmap backgroundImage;
 
 
     /**
@@ -110,6 +111,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         paint = new Paint();
         executorService = new ScheduledThreadPoolExecutor(1);
         mode = GameActivity.getMode();
+        backgroundImage = GameActivity.BACKGROUND_IMAGE_EASY;
 
         gameActivity = (GameActivity) context;
         s.addCallback(this);
@@ -211,8 +213,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     public void draw(SurfaceHolder holder) {
         Canvas canvas = holder.lockCanvas();
         Paint paint = new Paint();
-        canvas.drawBitmap(GameActivity.BACKGROUND_IMAGE, 0, this.backGroundTop - MainActivity.height, paint);
-        canvas.drawBitmap(GameActivity.BACKGROUND_IMAGE, 0, this.backGroundTop, paint);
+        canvas.drawBitmap(backgroundImage, 0, this.backGroundTop - MainActivity.height, paint);
+        canvas.drawBitmap(backgroundImage, 0, this.backGroundTop, paint);
         this.backGroundTop += 1;
         if(this.backGroundTop == MainActivity.height) {
             this.backGroundTop = 0;
@@ -374,18 +376,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         boss = true;
         enemyMaxNumber = 5;
         elite_probability = 0.3;
+        backgroundImage = GameActivity.BACKGROUND_IMAGE_EASY;
     }
 
     private void normal() {
         enemyMaxNumber = 10;
         elite_probability = 0.4;
         boss_score = 300;
+        backgroundImage = GameActivity.BACKGROUND_IMAGE_NORMAL;
     }
 
     private void hard() {
         enemyMaxNumber = 15;
         elite_probability = 0.5;
         boss_score = 150;
+        backgroundImage = GameActivity.BACKGROUND_IMAGE_HARD;
     }
 
     public void increase_score(int n) {
