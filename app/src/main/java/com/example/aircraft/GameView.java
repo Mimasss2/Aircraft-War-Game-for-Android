@@ -52,8 +52,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     private int backGroundTop = 0;
     private int enemyMaxNumber = 5;
+    private double elite_probability = 0.3;
     private Paint paint;
     private boolean boss = false;
+    private int mode = 1;
 
 
     /**
@@ -107,8 +109,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         items = new LinkedList<>();
         paint = new Paint();
         executorService = new ScheduledThreadPoolExecutor(1);
-        gameActivity = (GameActivity) context;
+        mode = GameActivity.getMode();
 
+        gameActivity = (GameActivity) context;
         s.addCallback(this);
     }
 
@@ -137,6 +140,22 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     @Override
     public void run() {
         System.out.println("Game start");
+
+        switch (mode) {
+            case 1: {
+                easy();
+                break;
+            }
+            case 2: {
+                normal();
+                break;
+            }
+            case 3: {
+                hard();
+                break;
+            }
+        }
+
         Runnable task = () -> {
             time += timeInterval;
 
@@ -145,7 +164,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     double rand = Math.random();
-                    if(rand < 0.5) {
+                    if(rand < elite_probability) {
                         enemy_creator = new EliteEnemyCreator();
                     }
                     else {
@@ -351,6 +370,23 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         canvas.drawText("LIFE:" + this.heroAircraft.getHp(), x, y,paint);
     }
 
+    private void easy() {
+        boss = true;
+        enemyMaxNumber = 5;
+        elite_probability = 0.3;
+    }
+
+    private void normal() {
+        enemyMaxNumber = 10;
+        elite_probability = 0.4;
+        boss_score = 300;
+    }
+
+    private void hard() {
+        enemyMaxNumber = 15;
+        elite_probability = 0.5;
+        boss_score = 150;
+    }
 
     public void increase_score(int n) {
         this.score += n;

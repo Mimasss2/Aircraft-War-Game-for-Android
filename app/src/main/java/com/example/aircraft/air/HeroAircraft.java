@@ -29,8 +29,7 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
-        this.setStrategy(new SpreadShoot());
-//        this.setStrategy(new SingleShoot());
+        this.setStrategy(new SingleShoot());
     }
     public void resetToCenter() {
         instance.setLocation(MainActivity.height / 2,

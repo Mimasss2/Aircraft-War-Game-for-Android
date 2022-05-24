@@ -46,11 +46,19 @@ public class GameActivity extends AppCompatActivity {
     private static String name = "localUser";
     private static int mode = 1;
 
+    public static int getMode() {
+        return mode;
+    }
+
     private boolean isControllingHero = false;
     public MusicService.MyBinder myBinder;
 //    public static MusicService.MyBinder myBinder;
     private Connect conn;
     private Intent intent;
+
+    public static void setMode(int mode) {
+        GameActivity.mode = mode;
+    }
 
     public static Bitmap get(String className){
         return CLASSNAME_IMAGE_MAP.get(className);
@@ -100,7 +108,6 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         gameView = findViewById(R.id.GameView);
 
-        //show_records();
     }
 
     @Override
@@ -176,7 +183,7 @@ public class GameActivity extends AppCompatActivity {
         Intent i = new Intent();
         i.putExtra("name", name);
         i.putExtra("score", gameView.getScore());
-        i.putExtra("mode", 1);
+        i.putExtra("mode", mode);
         i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameHistoryActivity"));
 
         startActivity(i);

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameActivity"));
+                GameActivity.setMode(1);
                 startActivity(i);
             }
         });
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameActivity"));
+                GameActivity.setMode(2);
                 startActivity(i);
             }
         });
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameActivity"));
+                GameActivity.setMode(3);
                 startActivity(i);
             }
         });
