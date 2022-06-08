@@ -54,7 +54,6 @@ public class GameActivity extends AppCompatActivity {
 
     private boolean isControllingHero = false;
     public MusicService.MyBinder myBinder;
-//    public static MusicService.MyBinder myBinder;
     private Connect conn;
     private Intent intent;
 

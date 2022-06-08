@@ -10,7 +10,7 @@
         android:id="@+id/rankTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="排行榜"
+        android:text="道具商城"
         android:textAlignment="center"
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/title_layout"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="rank"
+            android:text="图片"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="userName"
+            android:text="道具名词"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="score"
+            android:text="道具描述"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:text="time"
+            android:text="道具积分"
             android:textAlignment="center"
             android:textSize="18sp" />
     </LinearLayout>
@@ -80,37 +80,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:text="delete"
+        android:text="兑换"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_view" />
-
-    <TextView
-        android:id="@+id/difficultyMode"
-        android:layout_width="131dp"
-        android:layout_height="36dp"
-        android:text="难度：简单"
-        android:textColor="#3F51B5"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/title_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076" />
-
-    <TextView
-        android:id="@+id/internetMode"
-        android:layout_width="117dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="0dp"
-        android:text="模式：单机"
-        android:textAlignment="textEnd"
-        android:textColor="#673AB7"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rankTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <TextView
         android:id="@+id/recordTextView"
