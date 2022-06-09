@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,20 +25,21 @@ import com.example.aircraft.conn.DAO.Prop;
 import com.example.aircraft.conn.service.Impl.PropServiceImpl;
 import com.example.aircraft.conn.service.PropService;
 import com.example.aircraft.record.PropAdapter;
+import com.example.aircraft.record.UserPropAdapter;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PropMartActivity extends AppCompatActivity {
+public class UserPropActivity extends AppCompatActivity {
     ListView listView;
     List<Prop> propList;
     private DisplayMetrics displayMetrics;
     private int textWidthUnit;
     private int seletedPosition;
-    Prop selectedProp;
-    PropAdapter adapter;
+    UserPropAdapter adapter;
     PropService propService;
+    Prop selectedProp;
     //图片资源
     private static final Map<Integer, Bitmap> PROP_IMAGE_MAP = new HashMap<>();
     public static Bitmap PROP_BOMB;
@@ -47,6 +49,7 @@ public class PropMartActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadResources();
+        int userId = getUserId();
         PropHandler handler = new PropHandler();
         propService = new PropServiceImpl();
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -55,7 +58,7 @@ public class PropMartActivity extends AppCompatActivity {
 
         new Thread(() -> {
             Message message = Message.obtain();
-            propList = propService.showAllProps();
+            propList = propService.showUserProp(userId);
             message.what = 1;
             handler.sendMessage(message);
         }).start();
@@ -66,20 +69,11 @@ public class PropMartActivity extends AppCompatActivity {
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: add delete function
-//                adapter.remove(seletedPosition);
-                new Thread(() -> {
-                    Message message = Message.obtain();
-                    message.obj = selectedProp.getPropName();
-                    boolean buySuccess = propService.buyProp(getUserId(), selectedProp.getPropId());
-                    if(buySuccess) {
-                        message.what = 2;
-                    }
-                    else {
-                        message.what = 3;
-                    }
-                    handler.sendMessage(message);
-                }).start();
+                //todo: add use prop function
+                Message message = Message.obtain();
+                message.what = 2;
+                message.obj = selectedProp.getPropName();
+                handler.sendMessage(message);
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,9 +81,14 @@ public class PropMartActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 seletedPosition = position;
                 selectedProp = propList.get(position);
-                Toast.makeText(PropMartActivity.this,"选中道具"+selectedProp.getPropName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserPropActivity.this,"选中道具："+selectedProp.getPropName(),Toast.LENGTH_SHORT).show();
             }
         });
+        //设置TextView
+        TextView title = findViewById(R.id.mart_title);
+        title.setText("用户道具列表");
+        TextView selectProp = findViewById(R.id.select_prop_button);
+        selectProp.setText("使用选择道具");
     }
 
 
@@ -98,15 +97,12 @@ public class PropMartActivity extends AppCompatActivity {
             switch (msg.what) {
                 //load data success
                 case 1: {
-                    adapter = new PropAdapter(PropMartActivity.this, R.layout.prop_layout, propList);
+                    adapter = new UserPropAdapter(UserPropActivity.this, R.layout.prop_layout, propList);
                     adapter.setTextwidth(textWidthUnit);
                     listView.setAdapter(adapter);
                 }
                 case 2: {
-                    Toast.makeText(PropMartActivity.this,"购买道具："+msg.obj+"成功",Toast.LENGTH_SHORT).show();
-                }
-                case 3: {
-                    Toast.makeText(PropMartActivity.this,"购买道具："+msg.obj+"失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPropActivity.this,"使用道具："+msg.obj,Toast.LENGTH_SHORT).show();
                 }
             }
         }

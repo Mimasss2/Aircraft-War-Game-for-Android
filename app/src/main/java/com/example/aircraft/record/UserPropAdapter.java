@@ -1,6 +1,6 @@
 package com.example.aircraft.record;
 
-import static com.example.aircraft.PropMartActivity.getPropBitmap;
+import static com.example.aircraft.UserPropActivity.getPropBitmap;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,20 +14,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.aircraft.R;
-import com.example.aircraft.conn.DAO.GameRecord;
 import com.example.aircraft.conn.DAO.Prop;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class PropAdapter extends ArrayAdapter<Prop> {
+public class UserPropAdapter extends ArrayAdapter<Prop> {
     private List<Prop> propList;
     private int textwidth;
-    public PropAdapter(@NonNull Context context, int resource, @NonNull List<Prop> objects) {
+
+    public UserPropAdapter(@NonNull Context context, int resource, @NonNull List<Prop> objects) {
         super(context, resource, objects);
         this.propList = objects;
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

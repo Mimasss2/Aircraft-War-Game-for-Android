@@ -50,7 +50,7 @@ public class GameHistoryActivity extends AppCompatActivity {
         Intent i = getIntent();
         int score = i.getIntExtra("score", 0);
         int mode = i.getIntExtra("mode", 0);
-        setDifficultyTextView(mode);
+
 
         new Thread(() -> {
             Message message = Message.obtain();
@@ -63,6 +63,8 @@ public class GameHistoryActivity extends AppCompatActivity {
         }).start();
 
         setContentView(R.layout.activity_record);
+        setDifficultyTextView(mode);
+
         listView = findViewById(R.id.prop_list_view);
         Button deleteButton = (Button)findViewById(R.id.select_prop_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {

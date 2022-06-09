@@ -145,6 +145,9 @@ public class PropServiceImpl implements PropService {
         if(user.getUserCredit() < prop.getPropCredit()) {
             return false;
         }
+        if(checkPropBrought(propId,userId)) {
+            return false;
+        }
         boolean insertSuccess = insertPropInstance(userId, propId);
         if(insertSuccess) {
             userService.updateUserCredit(userId, user.getUserCredit()- prop.getPropCredit());
@@ -225,6 +228,41 @@ public class PropServiceImpl implements PropService {
             }
         }
         return propList;
+    }
+
+    private boolean checkPropBrought(int propId, int userId) {
+        Connection conn = null;
+        Statement stmt = null;
+        int count = 0;
+        try{
+            conn = getConnection();
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT * FROM aircraftwar.prop_instance WHERE prop_id = %s AND user_id = %s";
+            ResultSet rs = stmt.executeQuery(String.format(sql,propId,userId));
+            if(rs.next()){
+                count++;
+            }
+            rs.close();
+        }catch(SQLException se){
+            // deal with JDBC error
+            se.printStackTrace();
+        }catch(Exception e){
+            // deal with Class.forName error
+            e.printStackTrace();
+        }finally{
+            // close resources
+            try{
+                closeStatement(stmt);
+            }catch(SQLException se2){
+            }// do nothing
+            try{
+                closeConnection(conn);
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+        return count == 1;
     }
 
 }
