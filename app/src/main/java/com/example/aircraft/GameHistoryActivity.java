@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.aircraft.conn.DAO.GameRecord;
 import com.example.aircraft.conn.service.GameRecordService;
 import com.example.aircraft.conn.service.Impl.GameRecordServiceImpl;
-import com.example.aircraft.record.PlayerRecord;
-import com.example.aircraft.record.PlayerRecordDao;
-import com.example.aircraft.record.PlayerRecordDaoImpl;
 import com.example.aircraft.record.RecordAdapter;
 import java.util.List;
 
@@ -67,8 +63,8 @@ public class GameHistoryActivity extends AppCompatActivity {
         }).start();
 
         setContentView(R.layout.activity_record);
-        listView = findViewById(R.id.list_view);
-        Button deleteButton = (Button)findViewById(R.id.delete_button);
+        listView = findViewById(R.id.prop_list_view);
+        Button deleteButton = (Button)findViewById(R.id.select_prop_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -28,14 +28,15 @@ public class PropServiceImpl implements PropService {
             conn = getConnection();
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT prop_id, prop_name, prop_credit, prop_description FROM aircraftwar.props";
+            sql = "SELECT prop_id, prop_name, prop_credit, prop_description, resource_id FROM aircraftwar.props";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
                 int propId = rs.getInt("prop_id");
                 String propName = rs.getString("prop_name");
                 int propCredit = rs.getInt("prop_credit");
                 String propDescription = rs.getString("prop_description");
-                prop = new Prop(propId,propName,propCredit,propDescription);
+                int resourceId = rs.getInt("resource_id");
+                prop = new Prop(propId,propName,propCredit,propDescription,resourceId);
                 propList.add(prop);
             }
             rs.close();
@@ -67,10 +68,10 @@ public class PropServiceImpl implements PropService {
             conn = getConnection();
             statement = conn.createStatement();
             String sql;
-            sql = "INSERT INTO aircraftwar.props (prop_id,prop_name,prop_credit,prop_description) " +
-                    "VALUES (%s,\'%s\',%s,\'%s\')";
+            sql = "INSERT INTO aircraftwar.props (prop_id,prop_name,prop_credit,prop_description,resource_id) " +
+                    "VALUES (%s,\'%s\',%s,\'%s\',%s)";
             rowsChanged = statement.executeUpdate(String.format(sql,prop.getPropId(),prop.getPropName(),
-                    prop.getPropCredit(),prop.getDescription()));
+                    prop.getPropCredit(),prop.getDescription(),prop.getResourceId()));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -99,13 +100,14 @@ public class PropServiceImpl implements PropService {
             conn = getConnection();
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT prop_id, prop_name, prop_credit, prop_description FROM aircraftwar.props WHERE prop_id = %s";
+            sql = "SELECT prop_id, prop_name, prop_credit, prop_description, resource_id FROM aircraftwar.props WHERE prop_id = %s";
             ResultSet rs = stmt.executeQuery(String.format(sql,propId));
             if(rs.next()){
                 String propName = rs.getString("prop_name");
                 int propCredit = rs.getInt("prop_credit");
                 String propDescription = rs.getString("prop_description");
-                prop = new Prop(propId,propName,propCredit,propDescription);
+                int resourceId = rs.getInt("resource_id");
+                prop = new Prop(propId,propName,propCredit,propDescription,resourceId);
             }
             rs.close();
         }catch(SQLException se){
@@ -191,7 +193,7 @@ public class PropServiceImpl implements PropService {
             conn = getConnection();
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT p.prop_id, p.prop_name, p.prop_credit,p.prop_description FROM aircraftwar.props p INNER JOIN prop_instance i ON i" +
+            sql = "SELECT p.prop_id, p.prop_name, p.prop_credit,p.prop_description, p.resource_id FROM aircraftwar.props p INNER JOIN prop_instance i ON i" +
                     ".prop_id = p" +
                     ".prop_id WHERE i.user_id = %s";
             sql = String.format(sql,userId);
@@ -199,9 +201,10 @@ public class PropServiceImpl implements PropService {
             while(rs.next()){
                 int propId = rs.getInt("p.prop_id");
                 String propName = rs.getString("p.prop_name");
-                int propCredit = rs.getInt("prop_credit");
-                String propDescription = rs.getString("prop_description");
-                prop = new Prop(propId,propName,propCredit,propDescription);
+                int propCredit = rs.getInt("p.prop_credit");
+                String propDescription = rs.getString("p.prop_description");
+                int resourceId = rs.getInt("p.resource_id");
+                prop = new Prop(propId,propName,propCredit,propDescription,resourceId);
                 propList.add(prop);
             }
             rs.close();

@@ -13,24 +13,24 @@
         android:text="排行榜"
         android:textAlignment="center"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/title_layout"
+        app:layout_constraintBottom_toTopOf="@+id/prop_title_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.51" />
 
     <LinearLayout
-        android:id="@+id/title_layout"
+        android:id="@+id/prop_title_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintBottom_toTopOf="@+id/prop_list_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rankTitle">
 
         <TextView
-            android:id="@+id/rank"
+            android:id="@+id/prop_image_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/prop_name_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -48,7 +48,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/prop_description_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -57,7 +57,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/prop_credit_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -67,16 +67,16 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/prop_list_view"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:headerDividersEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/delete_button"
-        app:layout_constraintStart_toStartOf="@+id/title_layout"
-        app:layout_constraintTop_toBottomOf="@+id/title_layout" />
+        app:layout_constraintBottom_toTopOf="@+id/select_prop_button"
+        app:layout_constraintStart_toStartOf="@+id/prop_title_layout"
+        app:layout_constraintTop_toBottomOf="@+id/prop_title_layout" />
 
     <Button
-        android:id="@+id/delete_button"
+        android:id="@+id/select_prop_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_view" />
+        app:layout_constraintTop_toBottomOf="@+id/prop_list_view" />
 
     <TextView
         android:id="@+id/difficultyMode"
@@ -94,7 +94,7 @@
         android:text="难度：简单"
         android:textColor="#3F51B5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/title_layout"
+        app:layout_constraintBottom_toBottomOf="@+id/prop_title_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.076" />

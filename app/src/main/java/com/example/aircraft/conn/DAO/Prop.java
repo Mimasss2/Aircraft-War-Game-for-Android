@@ -5,12 +5,14 @@ public class Prop {
     private String propName;
     private int propCredit;
     String description;
+    private int resourceId;
 
-    public Prop(int propId, String propName, int propCredit,String description) {
+    public Prop(int propId, String propName, int propCredit,String description,int resourceId) {
         this.propId = propId;
         this.propName = propName;
         this.propCredit = propCredit;
         this.description = description;
+        this.resourceId = resourceId;
     }
 
     public int getPropId() {
@@ -45,6 +47,14 @@ public class Prop {
         this.description = description;
     }
 
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
+    }
+
     @Override
     public String toString() {
         return "Prop{" +
@@ -52,6 +62,7 @@ public class Prop {
                 ", propName='" + propName + '\'' +
                 ", propCredit=" + propCredit +
                 ", description='" + description + '\'' +
+                ", resourceId=" + resourceId +
                 '}';
     }
 }
