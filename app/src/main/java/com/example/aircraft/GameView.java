@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -32,6 +33,15 @@ import com.example.aircraft.record.PlayerRecordDao;
 import com.example.aircraft.record.PlayerRecordDaoImpl;
 import com.example.aircraft.service.MusicConst;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
@@ -46,6 +56,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private int time = 0;
     private int score = 0;
     private int last_score = 0;
+    private int opp_score = 0;
 
     private int cycleDuration = 600;
     private int cycleTime = 0;
@@ -57,7 +68,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private boolean boss = false;
     private int mode = 1;
     private Bitmap backgroundImage;
-
+    private Socket socket;
+    private PrintWriter writer;
+    private BufferedReader reader;
+    private String message_from_server;
 
     /**
      * Scheduled 线程池，用于任务调度
@@ -156,6 +170,37 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                 hard();
                 break;
             }
+            case 4: {
+                new NetConn().start();
+            }
+        }
+//        if(mode == 4) {
+//            synchronized (reader) {
+//                try {
+//                    reader.wait();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//           while (message_from_server != "start"){
+//                new Thread(() -> {
+//                    try {
+//                        message_from_server = reader.readLine();
+//                        System.out.println(message_from_server);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }).start();
+//            }
+//        }
+        if(mode == 4) {
+            synchronized (GameView.this) {
+                try {
+                    GameView.this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         Runnable task = () -> {
@@ -163,7 +208,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
-
+                if(mode == 4) {
+                    new Thread(() -> {
+                        writer.println(score);
+                        try {
+                            String message = reader.readLine();
+                            if (message != null) {
+                                opp_score = Integer.parseInt(message);
+                            }
+                            System.out.println(opp_score);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                }
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     double rand = Math.random();
                     if(rand < elite_probability) {
@@ -202,6 +260,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
             if(heroAircraft.getHp() <= 0) {
                 executorService.shutdown();
                 System.out.println("Game over");
+                if(mode == 4) {
+                    new Thread(() -> {
+                        writer.println("quit");
+                    }).start();
+                }
                 gameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
                 gameActivity.show_records();
             }
@@ -370,6 +433,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         canvas.drawText("SCORE:" + this.score,x,y,paint);
         y = y + 80;
         canvas.drawText("LIFE:" + this.heroAircraft.getHp(), x, y,paint);
+        y = y + 80;
+        canvas.drawText("OPP_SCORE:" + this.opp_score, x, y, paint);
     }
 
     private void easy() {
@@ -395,5 +460,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     public void increase_score(int n) {
         this.score += n;
+    }
+
+    protected class NetConn extends Thread{
+        @Override
+        public void run(){
+            try{
+                socket = new Socket();
+                //运行时修改成服务器的IP
+                socket.connect(new InetSocketAddress
+                        ("192.168.75.1",9999),5000);
+                writer = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(
+                                socket.getOutputStream(),"UTF-8")),true);
+                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                while (message_from_server == null || !message_from_server.equals("start")) {
+                    message_from_server = reader.readLine();
+                }
+                synchronized (GameView.this) {
+                    GameView.this.notifyAll();
+                }
+                Log.i("client","connect to server");
+            }catch(UnknownHostException ex){
+                ex.printStackTrace();
+            }catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 }

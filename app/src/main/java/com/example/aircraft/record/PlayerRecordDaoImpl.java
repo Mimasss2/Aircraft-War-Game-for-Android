@@ -18,7 +18,7 @@ public class PlayerRecordDaoImpl implements PlayerRecordDao{
     public PlayerRecordDaoImpl(GameHistoryActivity gameHistoryActivity) {
         activity = gameHistoryActivity;
     }
-    private String[] tags = {"records_easy","records_medium","records_hard"};
+    private String[] tags = {"records_easy","records_medium","records_hard", "records_internet"};
 
     @Override
     public List<PlayerRecord> getAllRecords(int gameMode) {

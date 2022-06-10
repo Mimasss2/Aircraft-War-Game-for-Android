@@ -63,6 +63,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button b4 = (Button) findViewById(R.id.button4);
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.GameActivity"));
+                GameActivity.setMode(4);
+                startActivity(i);
+            }
+        });
+
         Spinner s = (Spinner) findViewById(R.id.spinner);
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

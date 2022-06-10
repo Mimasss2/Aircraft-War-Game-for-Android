@@ -49,7 +49,7 @@ public class GameHistoryActivity extends AppCompatActivity {
 //        playerRecordDao.addRecord(new PlayerRecord("localUser",10200),1);
 //        playerRecordDao.addRecord(new PlayerRecord("localUser",14000),1);
 //        playerRecordDao.addRecord(new PlayerRecord("localUser",100),1);
-        playerRecords = playerRecordDao.getAllRecords(1);
+        playerRecords = playerRecordDao.getAllRecords(mode);
 
         setContentView(R.layout.activity_record);
         listView = findViewById(R.id.list_view);
