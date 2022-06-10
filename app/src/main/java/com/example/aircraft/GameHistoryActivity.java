@@ -45,18 +45,17 @@ public class GameHistoryActivity extends AppCompatActivity {
         textWidthUnit = displayMetrics.widthPixels/8;
 
         //new database service
-        gameRecordService = new GameRecordServiceImpl();
+        gameRecordService = new GameRecordServiceImpl(GameHistoryActivity.this);
 
         Intent i = getIntent();
         int score = i.getIntExtra("score", 0);
         int mode = i.getIntExtra("mode", 0);
 
-
         new Thread(() -> {
             Message message = Message.obtain();
             int userId = getUserId();
             String name = getUserName();
-            gameRecordService.insertGameRecord(new GameRecord(userId,score,name,mode));
+            gameRecordService.insertGameRecord(new GameRecord(userId,score,name,mode),mode);
             gameRecords = gameRecordService.getAllGameRecords(mode);
             message.what = 1;
             gameRecordHandler.sendMessage(message);
@@ -124,6 +123,19 @@ public class GameHistoryActivity extends AppCompatActivity {
                 difficultyTextView.setText("难度：困难");
                 break;
             }
+            case 4: {
+                difficultyTextView.setText("难度：简单");
+                break;
+            }
+        }
+    }
+    public void setInternetModeTextView(int mode) {
+        internetModeTextView = findViewById(R.id.internetMode);
+        if(mode == 4) {
+            internetModeTextView.setText("模式：联网");
+        }
+        else {
+            internetModeTextView.setText("模式：单机");
         }
     }
 }

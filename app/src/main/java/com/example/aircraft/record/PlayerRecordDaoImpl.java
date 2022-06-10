@@ -88,26 +88,6 @@ public class PlayerRecordDaoImpl implements PlayerRecordDao{
 
     }
 
-/*    public List<PlayerRecord> readFromFile(int gameMode) {
-        List<PlayerRecord> playerRecordList = new ArrayList<>();
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(paths[gameMode-1]))) {
-            PlayerRecord playerRecord = (PlayerRecord) objectInputStream.readObject();
-            while(playerRecord != null) {
-                playerRecordList.add(playerRecord);
-                playerRecord = (PlayerRecord) objectInputStream.readObject();
-            }
-        } catch (FileNotFoundException e) {
-            playerRecordList = null;
-        } catch (IOException e) {
-            playerRecordList = null;
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            playerRecordList = null;
-            e.printStackTrace();
-        }
-        return playerRecordList;
-    }*/
-
     public List<PlayerRecord> readFromFile(int gameMode) {
         List<PlayerRecord> playerRecordList;
         SharedPreferences userPreference = activity.getPreferences(Context.MODE_PRIVATE);
@@ -120,60 +100,5 @@ public class PlayerRecordDaoImpl implements PlayerRecordDao{
         return playerRecordList;
     }
 
-/*
-    public static void main(String[] args) {
-        PlayerRecordDao playerRecordDao = new PlayerRecordDaoImpl();
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-        playerRecordDao.addRecord(new PlayerRecord("fake",100),1);
-    }
-*/
 
 }
