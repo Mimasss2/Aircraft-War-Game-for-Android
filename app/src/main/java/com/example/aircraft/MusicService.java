@@ -55,6 +55,9 @@ public class MusicService extends Service {
         public void stopBossBgm() {
             stopBossMusic();
         }
+        public void stopBgm() {
+            stopBGMMusic();
+        };
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {

@@ -203,5 +203,8 @@ public class GameActivity extends AppCompatActivity {
     public void stopBossMusic() {
         myBinder.stopBossBgm();
     }
+    public void stopBGM() {
+        myBinder.stopBgm();
+    }
 
 }

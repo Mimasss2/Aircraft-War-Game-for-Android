@@ -53,8 +53,7 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         int score = i.getIntExtra("score", 0);
-//        mode = i.getIntExtra("mode", 0);
-        mode = 4;
+        mode = i.getIntExtra("mode", 0);
 
         new Thread(() -> {
             Message message = Message.obtain();

@@ -95,7 +95,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     private static EnemyCreator enemy_creator;
     private static int boss_score = 100;
     private GameActivity gameActivity;
-    private PlayerRecordDao playerRecordDao;
 
     public List<AbstractAircraft> getEnemyAircrafts() {
         return enemyAircrafts;
@@ -265,6 +264,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                         writer.println("quit");
                     }).start();
                 }
+                gameActivity.stopBGM();
                 gameActivity.playMusicOnce(MusicConst.MUSIC_GAME_OVER);
                 gameActivity.show_records();
             }
