@@ -46,6 +46,10 @@ public class RecordAdapter extends ArrayAdapter<GameRecord> {
         gameRecords.remove(position);
         notifyDataSetChanged();
     }
+    public void refresh(List<GameRecord> gameRecordList) {
+        gameRecords = gameRecordList;
+        notifyDataSetChanged();
+    }
     public void setTextwidth(int textwidth) {
         this.textwidth = textwidth;
     }

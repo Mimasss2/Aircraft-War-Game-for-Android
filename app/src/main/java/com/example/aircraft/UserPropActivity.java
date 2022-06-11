@@ -42,8 +42,11 @@ public class UserPropActivity extends AppCompatActivity {
     Prop selectedProp;
     //图片资源
     private static final Map<Integer, Bitmap> PROP_IMAGE_MAP = new HashMap<>();
-    public static Bitmap PROP_BOMB;
-    public static Bitmap PROP_SHIELD;
+    public static Bitmap PROP_1;
+    public static Bitmap PROP_2;
+    public static Bitmap PROP_3;
+    public static Bitmap PROP_4;
+    public static Bitmap PROP_5;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,10 +113,16 @@ public class UserPropActivity extends AppCompatActivity {
 
     public void loadResources() {
         Resources res = this.getResources();
-        PROP_BOMB = BitmapFactory.decodeResource(res, R.drawable.prop_bomb);
-        PROP_SHIELD = BitmapFactory.decodeResource(res, R.drawable.prop_blood);
-        PROP_IMAGE_MAP.put(1,PROP_BOMB);
-        PROP_IMAGE_MAP.put(2,PROP_SHIELD);
+        PROP_1 = BitmapFactory.decodeResource(res, R.drawable.prop_1);
+        PROP_2 = BitmapFactory.decodeResource(res, R.drawable.prop_2);
+        PROP_3 = BitmapFactory.decodeResource(res, R.drawable.prop_3);
+        PROP_4 = BitmapFactory.decodeResource(res, R.drawable.prop_4);
+        PROP_5 = BitmapFactory.decodeResource(res, R.drawable.prop_5);
+        PROP_IMAGE_MAP.put(1,PROP_1);
+        PROP_IMAGE_MAP.put(2,PROP_2);
+        PROP_IMAGE_MAP.put(3,PROP_3);
+        PROP_IMAGE_MAP.put(4,PROP_4);
+        PROP_IMAGE_MAP.put(5,PROP_5);
     }
     public static Bitmap getPropBitmap(int key) {
         return PROP_IMAGE_MAP.get(key);

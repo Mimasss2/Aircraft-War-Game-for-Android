@@ -90,7 +90,7 @@ public class GameActivity extends AppCompatActivity {
         ELITE_ENEMY_IMAGE = BitmapFactory.decodeResource(res, R.drawable.elite);
         BOSS_ENEMY_IMAGE = BitmapFactory.decodeResource(res, R.drawable.boss);
         BLOOD_PROP_IMAG = BitmapFactory.decodeResource(res, R.drawable.prop_blood);
-        BOMB_PROP_IMAG = BitmapFactory.decodeResource(res, R.drawable.prop_bomb2);
+        BOMB_PROP_IMAG = BitmapFactory.decodeResource(res, R.drawable.prop_bomb);
         BULLET_PROP_IMAG = BitmapFactory.decodeResource(res, R.drawable.prop_bullet);
 
         CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);

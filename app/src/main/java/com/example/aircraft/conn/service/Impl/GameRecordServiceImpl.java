@@ -37,7 +37,7 @@ public class GameRecordServiceImpl implements GameRecordService {
     public boolean insertGameRecord(GameRecord gameRecord, int gameMode) {
         boolean insertSuccess = false;
         if(gameMode == 4) {
-            insertSuccess = insertGameRecord(gameRecord,gameMode);
+            insertSuccess = addRemoteRecord(gameRecord);
         }
         else {
             insertSuccess = addLocalRecord(gameRecord,gameMode);
@@ -198,6 +198,11 @@ public class GameRecordServiceImpl implements GameRecordService {
 
     @Override
     public void deleteLocalRecord(int index, int gameMode) {
+        List<GameRecord> allGameRecords = getAllGameRecords(gameMode);
+        GameRecord gameRecord = allGameRecords.get(index);
+        Log.i("gameRecord service:","removing record:"+gameRecord.toString());
+        allGameRecords.remove(index);
+        writeToFile(allGameRecords,gameMode);
 
     }
     public void writeToFile(List<GameRecord> gameRecordList, int gameMode) {

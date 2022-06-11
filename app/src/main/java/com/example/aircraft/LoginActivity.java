@@ -20,7 +20,6 @@ import com.example.aircraft.conn.DAO.User;
 import com.example.aircraft.conn.service.Impl.UserServiceImpl;
 import com.example.aircraft.conn.service.UserService;
 
-import kotlinx.coroutines.internal.ThreadSafeHeap;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String settingsPath = "userSettings";

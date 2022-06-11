@@ -38,8 +38,8 @@ public class PropAdapter extends ArrayAdapter<Prop> {
         TextView propDescriptionView = view.findViewById(R.id.propDescriptionTextView);
         TextView propCreditTextView = view.findViewById(R.id.propCreditTextView);
         propImageView.setMaxWidth(2*textwidth);
-        propNameView.setWidth(textwidth);
-        propDescriptionView.setWidth(4*textwidth);
+        propNameView.setWidth(2*textwidth);
+        propDescriptionView.setWidth(3*textwidth);
         propCreditTextView.setWidth(textwidth);
         propNameView.setText(prop.getPropName());
         propDescriptionView.setText(prop.getDescription());

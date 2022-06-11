@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +31,13 @@ public class GameHistoryActivity extends AppCompatActivity {
     private DisplayMetrics displayMetrics;
     private int textWidthUnit;
     private int seletedPosition;
+    GameRecord gameRecord;
     RecordAdapter adapter;
     GameRecordService gameRecordService;
     TextView difficultyTextView;
     TextView internetModeTextView;
+    Button deleteButton;
+    int mode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +53,8 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         int score = i.getIntExtra("score", 0);
-        int mode = i.getIntExtra("mode", 0);
+//        mode = i.getIntExtra("mode", 0);
+        mode = 4;
 
         new Thread(() -> {
             Message message = Message.obtain();
@@ -62,25 +67,41 @@ public class GameHistoryActivity extends AppCompatActivity {
         }).start();
 
         setContentView(R.layout.activity_record);
+        deleteButton = (Button)findViewById(R.id.select_prop_button);
         setDifficultyTextView(mode);
+        setInternetModeTextView(mode);
+        setDeleteButton(mode);
 
         listView = findViewById(R.id.prop_list_view);
-        Button deleteButton = (Button)findViewById(R.id.select_prop_button);
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //todo: add delete function
-//                adapter.remove(seletedPosition);
-//                playerRecordDao.deleteRecord(seletedPosition,1);
+                new Thread(() -> {
+                    if(mode == 4) {
+                        Message message = Message.obtain();
+//                        adapter.refresh(gameRecordService.getAllGameRecords(mode));
+                        gameRecords = gameRecordService.getAllGameRecords(mode);
+                        message.what = 1;
+                        gameRecordHandler.sendMessage(message);
+                    }
+                    else {
+                        adapter.remove(seletedPosition);
+                        gameRecordService.deleteLocalRecord(seletedPosition,mode);
+                    }
+                }).start();
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //todo: add select item
-//                seletedPosition = position;
-//                PlayerRecord playerRecord = playerRecords.get(position);
-//                Toast.makeText(GameHistoryActivity.this,"选中记录："+playerRecord.toString(),Toast.LENGTH_LONG).show();
+                seletedPosition = position;
+                new Thread(() -> {
+                    gameRecord = gameRecords.get(position);
+                }).start();
+//                Toast.makeText(GameHistoryActivity.this,"选中记录："+gameRecord.toString(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -136,6 +157,17 @@ public class GameHistoryActivity extends AppCompatActivity {
         }
         else {
             internetModeTextView.setText("模式：单机");
+        }
+    }
+    public void setDeleteButton(int mode) {
+        if(deleteButton == null) {
+            return;
+        }
+        if(mode == 4) {
+            deleteButton.setText("refresh");
+        }
+        else {
+            deleteButton.setText("delete");
         }
     }
 }
