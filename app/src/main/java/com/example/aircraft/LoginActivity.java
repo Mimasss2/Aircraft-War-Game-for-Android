@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"WelCome!",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MainActivity"));
+                    intent.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MenuActivity"));
                     startActivity(intent);
                     finish();
                     break;
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i("database connect","register success");
 
                     Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MainActivity"));
+                    intent.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MenuActivity"));
                     startActivity(intent);
                     finish();
                 }

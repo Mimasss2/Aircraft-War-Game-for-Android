@@ -77,13 +77,14 @@
 
     <Button
         android:id="@+id/select_prop_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="2dp"
         android:text="delete"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prop_list_view" />
 
@@ -111,6 +112,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/rankTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/return_button"
+        android:layout_width="169dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="2dp"
+        android:text="RETURN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/select_prop_button"
+        app:layout_constraintTop_toBottomOf="@+id/prop_list_view" />
 
     <!--    <TextView
         android:id="@+id/recordTextView"

@@ -2,6 +2,7 @@ package com.example.aircraft;
 
 import static com.example.aircraft.LoginActivity.settingsPath;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -67,6 +68,7 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_record);
         deleteButton = (Button)findViewById(R.id.select_prop_button);
+        Button return_button = (Button) findViewById(R.id.return_button);
         setDifficultyTextView(mode);
         setInternetModeTextView(mode);
         setDeleteButton(mode);
@@ -90,6 +92,14 @@ public class GameHistoryActivity extends AppCompatActivity {
                         gameRecordService.deleteLocalRecord(seletedPosition,mode);
                     }
                 }).start();
+            }
+        });
+        return_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MenuActivity"));
+                startActivity(intent);
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
