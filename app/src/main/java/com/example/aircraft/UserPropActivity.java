@@ -2,6 +2,8 @@ package com.example.aircraft;
 
 import static com.example.aircraft.LoginActivity.settingsPath;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -77,6 +79,9 @@ public class UserPropActivity extends AppCompatActivity {
                 message.what = 2;
                 message.obj = selectedProp.getPropName();
                 handler.sendMessage(message);
+                Intent i = new Intent();
+                i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MainActivity"));
+                startActivity(i);
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

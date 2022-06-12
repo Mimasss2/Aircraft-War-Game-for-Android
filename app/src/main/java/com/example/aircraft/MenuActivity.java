@@ -24,7 +24,7 @@ public class MenuActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
-                i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.MainActivity"));
+                i.setComponent(new ComponentName("com.example.aircraft", "com.example.aircraft.UserPropActivity"));
                 startActivity(i);
             }
         });
