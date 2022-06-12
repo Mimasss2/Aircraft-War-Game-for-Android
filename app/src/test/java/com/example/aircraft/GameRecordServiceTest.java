@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GameRecordServiceTest {
 
-/*    @Test
+    @Test
     public void insertGameRecord() {
         GameRecordService gameRecordService = new GameRecordServiceImpl();
         GameRecord gameRecord = new GameRecord(2, 100, "test4", 2);
@@ -31,5 +31,5 @@ public class GameRecordServiceTest {
     @Test
     public void test() {
         System.out.println("test");
-    }*/
+    }
 }

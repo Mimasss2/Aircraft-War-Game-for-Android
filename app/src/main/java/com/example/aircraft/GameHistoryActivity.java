@@ -80,17 +80,17 @@ public class GameHistoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //todo: add delete function
                 new Thread(() -> {
+                    Message message = Message.obtain();
                     if(mode == 4) {
-                        Message message = Message.obtain();
-//                        adapter.refresh(gameRecordService.getAllGameRecords(mode));
                         gameRecords = gameRecordService.getAllGameRecords(mode);
                         message.what = 1;
-                        gameRecordHandler.sendMessage(message);
                     }
                     else {
-                        adapter.remove(seletedPosition);
+//                        adapter.remove(seletedPosition);
+                        message.what = 2;
                         gameRecordService.deleteLocalRecord(seletedPosition,mode);
                     }
+                    gameRecordHandler.sendMessage(message);
                 }).start();
             }
         });
@@ -133,6 +133,10 @@ public class GameHistoryActivity extends AppCompatActivity {
                     adapter = new RecordAdapter(GameHistoryActivity.this, R.layout.record_layout, gameRecords);
                     adapter.setTextwidth(textWidthUnit);
                     listView.setAdapter(adapter);
+                }
+                //select an item in listview
+                case 2: {
+                    adapter.remove(seletedPosition);
                 }
             }
         }

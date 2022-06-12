@@ -17,7 +17,7 @@ public class PropServiceTest {
     }
     @Test
     public void insertProp() {
-/*        boolean res;
+        boolean res;
         res = propService.insertProp(new Prop(1, "bomb1", 50,));
         System.out.println(res);
         res = propService.insertProp(new Prop(2, "bomb2", 500));
@@ -27,7 +27,7 @@ public class PropServiceTest {
         res = propService.insertProp(new Prop(0, "bomb0", 333));
         System.out.println(res);
         res = propService.insertProp(new Prop(7, "bomb7", 1));
-        System.out.println(res);*/
+        System.out.println(res);
     }
     @Test
     public void getPropById() {
