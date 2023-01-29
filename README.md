@@ -6,11 +6,11 @@ HITSZ 2022春面向对象课程项目，Collaborator: yym
 
 本项目主要分为用户验证，游戏，道具商城三大部分。
 
-![function](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/image/function.png)
+![function](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/img/function.png)
 
 ### 流程图
 
-![pipeline](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/image/pipeline.png)
+![pipeline](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/img/pipeline.png)
 
 用户登录后，执行的操作顺序如上图所示。
 
@@ -20,7 +20,7 @@ HITSZ 2022春面向对象课程项目，Collaborator: yym
 
 在联机模式下，两对战用户的信息（得分）需要互通。我们采用socket实现两个玩家之间的信息传输。
 
-![socket](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/image/socket.png)
+![socket](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/img/socket.png)
 
 #### 数据存储方案
 
@@ -47,8 +47,8 @@ Mysql数据库**prop_instance**表存储所有用户所持的道具实例，每�
 
 游戏界面：
 
-![login](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/image/login.png)
+![login](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/img/login.png)
 
 登录界面：
 
-![game](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/image/game.png)
+![game](https://github.com/Mimasss2/Aircraft-War-Game-for-Android/tree/main/img/game.png)
